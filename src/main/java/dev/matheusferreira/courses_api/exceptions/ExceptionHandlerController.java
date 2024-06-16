@@ -62,6 +62,15 @@ public class ExceptionHandlerController {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(dto);
   }
 
+  @ExceptionHandler(BusinessErrorException.class)
+  public ResponseEntity<Object> handleBusinessErrorException(BusinessErrorException e) {
+    ExceptionDTO dto = ExceptionDTO.builder()
+      .message(e.getMessage())
+      .build();
+    
+    return ResponseEntity.status(e.getHttpStatus()).body(dto);
+  }
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<Object> handleInternalServerError(Exception e) {
     e.printStackTrace();
