@@ -51,4 +51,8 @@ public class CourseEntity {
   @NotNull
   boolean active;
 
+  public void toggleActive() {
+    this.active = !this.active;
+  }
+
 }

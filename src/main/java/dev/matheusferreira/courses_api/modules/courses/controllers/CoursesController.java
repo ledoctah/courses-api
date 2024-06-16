@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +22,7 @@ import dev.matheusferreira.courses_api.modules.courses.entities.CourseEntity;
 import dev.matheusferreira.courses_api.modules.courses.useCases.CreateCourseUseCase;
 import dev.matheusferreira.courses_api.modules.courses.useCases.DeleteCourseUseCase;
 import dev.matheusferreira.courses_api.modules.courses.useCases.ListCoursesUseCase;
+import dev.matheusferreira.courses_api.modules.courses.useCases.ToggleCourseActiveUseCase;
 import dev.matheusferreira.courses_api.modules.courses.useCases.UpdateCourseUseCase;
 import jakarta.validation.Valid;
 
@@ -39,6 +41,9 @@ public class CoursesController {
 
   @Autowired
   private DeleteCourseUseCase deleteCourseUseCase;
+
+  @Autowired
+  private ToggleCourseActiveUseCase toggleCourseActiveUseCase;
   
   @GetMapping
   public List<CourseEntity> listCourses(@RequestBody @Valid ListCoursesDTO listCoursesDTO) {
@@ -61,6 +66,11 @@ public class CoursesController {
     deleteCourseUseCase.execute(UUID.fromString(courseId));
 
     return ResponseEntity.noContent().build();
+  }
+
+  @PatchMapping("/{courseId}/active")
+  public CourseEntity toggleCourseActive(@PathVariable("courseId") String courseId) {
+    return toggleCourseActiveUseCase.execute(UUID.fromString(courseId));
   }
 
 }
