@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
 
@@ -20,6 +21,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "courses")
+@DynamicUpdate
 @Data
 @Builder
 @AllArgsConstructor

@@ -12,4 +12,6 @@ public interface CoursesRepository extends JpaRepository<CourseEntity, UUID> {
   List<CourseEntity> findByCategoryAndNameContainingIgnoreCase(String category, String name);
 
   Optional<CourseEntity> findByNameAndCategory(String name, String category);
+
+  Optional<CourseEntity> findByNameAndCategoryAndIdNot(String name, String category, UUID id);
 }
