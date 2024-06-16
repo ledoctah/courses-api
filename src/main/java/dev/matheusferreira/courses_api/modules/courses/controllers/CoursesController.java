@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,7 @@ import dev.matheusferreira.courses_api.modules.courses.dtos.ListCoursesDTO;
 import dev.matheusferreira.courses_api.modules.courses.dtos.UpdateCourseDTO;
 import dev.matheusferreira.courses_api.modules.courses.entities.CourseEntity;
 import dev.matheusferreira.courses_api.modules.courses.useCases.CreateCourseUseCase;
+import dev.matheusferreira.courses_api.modules.courses.useCases.DeleteCourseUseCase;
 import dev.matheusferreira.courses_api.modules.courses.useCases.ListCoursesUseCase;
 import dev.matheusferreira.courses_api.modules.courses.useCases.UpdateCourseUseCase;
 import jakarta.validation.Valid;
@@ -33,6 +36,9 @@ public class CoursesController {
 
   @Autowired
   private UpdateCourseUseCase updateCourseUseCase;
+
+  @Autowired
+  private DeleteCourseUseCase deleteCourseUseCase;
   
   @GetMapping
   public List<CourseEntity> listCourses(@RequestBody @Valid ListCoursesDTO listCoursesDTO) {
@@ -48,6 +54,13 @@ public class CoursesController {
   public CourseEntity updateCourse(@PathVariable("courseId") String courseId, @RequestBody @Valid UpdateCourseDTO updateCourseDTO) {
     updateCourseDTO.setId(UUID.fromString(courseId));
     return updateCourseUseCase.execute(updateCourseDTO);
+  }
+
+  @DeleteMapping("/{courseId}")
+  public ResponseEntity<Object> deleteCourse(@PathVariable("courseId") String courseId) {
+    deleteCourseUseCase.execute(UUID.fromString(courseId));
+
+    return ResponseEntity.noContent().build();
   }
 
 }
