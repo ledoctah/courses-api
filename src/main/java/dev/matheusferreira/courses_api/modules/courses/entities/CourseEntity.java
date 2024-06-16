@@ -32,12 +32,10 @@ public class CourseEntity {
 
   @CreationTimestamp
   @Column(name = "created_at")
-  @NotNull
   LocalDateTime createdAt;
   
   @UpdateTimestamp
   @Column(name = "updated_at")
-  @NotNull
   LocalDateTime updatedAt;
 
   @NotNull
