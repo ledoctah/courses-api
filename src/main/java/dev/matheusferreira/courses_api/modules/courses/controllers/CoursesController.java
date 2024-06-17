@@ -63,6 +63,11 @@ public class CoursesController {
   }
 
   @PostMapping
+  @Operation(summary = "Criação de cursos", description = "Endpoint responsável por fazer a criação de um curso.")
+  @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = CourseEntity.class)))
+  @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ExceptionDTO.class)))
+  @ApiResponse(responseCode = "409", description = "Conflict", content = @Content(schema = @Schema(implementation = ExceptionDTO.class), examples = @ExampleObject(value = "{\"timestamp\":\"2024-06-17T15:35:28.363339\",\"status\":\"CONFLICT\",\"message\":\"Um curso com o mesmo nome e categoria já está cadastrado\",\"details\":null}")))
+  @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ExceptionDTO.class), examples = @ExampleObject(value = "{\"timestamp\":\"2024-06-17T15:35:28.363339\",\"status\":\"INTERNAL_SERVER_ERROR\",\"message\":\"Internal Server Error\",\"details\":null}")))
   public CourseEntity createCourse(@RequestBody @Valid CreateCourseDTO createCourseDTO) {
     return createCourseUseCase.execute(createCourseDTO);
   }
