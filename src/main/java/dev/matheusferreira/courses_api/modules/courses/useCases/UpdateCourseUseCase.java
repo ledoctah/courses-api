@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import dev.matheusferreira.courses_api.modules.courses.dtos.UpdateCourseDTO;
 import dev.matheusferreira.courses_api.modules.courses.entities.CourseEntity;
+import dev.matheusferreira.courses_api.modules.courses.exceptions.CourseAlreadyExistsException;
 import dev.matheusferreira.courses_api.modules.courses.exceptions.CourseNotFoundException;
 import dev.matheusferreira.courses_api.modules.courses.repositories.CoursesRepository;
 
@@ -27,6 +28,14 @@ public class UpdateCourseUseCase {
     if(updateCourseDTO.getCategory() != null) {
       courseEntity.setCategory(updateCourseDTO.getCategory());
     }
+
+    this.coursesRepository.findByNameAndCategoryAndIdNot(
+      courseEntity.getName(),
+      courseEntity.getCategory(),
+      courseEntity.getId()
+    ).ifPresent((course) -> {
+      throw new CourseAlreadyExistsException();
+    });
 
     return this.coursesRepository.save(courseEntity);
   }
