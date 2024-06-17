@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public class BusinessErrorException extends RuntimeException {
   
-  private HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+  private HttpStatus httpStatus;
 
   public BusinessErrorException(String message, HttpStatus httpStatus) {
     super(message);

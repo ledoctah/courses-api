@@ -65,6 +65,7 @@ public class ExceptionHandlerController {
   @ExceptionHandler(BusinessErrorException.class)
   public ResponseEntity<Object> handleBusinessErrorException(BusinessErrorException e) {
     ExceptionDTO dto = ExceptionDTO.builder()
+      .status(e.getHttpStatus())
       .message(e.getMessage())
       .build();
     
