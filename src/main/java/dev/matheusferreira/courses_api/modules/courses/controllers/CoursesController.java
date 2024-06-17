@@ -85,7 +85,11 @@ public class CoursesController {
   }
 
   @DeleteMapping("/{courseId}")
-  public ResponseEntity<Object> deleteCourse(@PathVariable("courseId") String courseId) {
+  @Operation(summary = "Deleção de cursos", description = "Endpoint responsável por fazer a deleção de um curso.")
+  @ApiResponse(responseCode = "204", content = @Content(schema = @Schema(example = "")))
+  @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ExceptionDTO.class), examples = @ExampleObject(value = "{\"timestamp\":\"2024-06-17T15:35:28.363339\",\"status\":\"NOT_FOUND\",\"message\":\"O curso não foi encontrado\",\"details\":null}")))
+  @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ExceptionDTO.class), examples = @ExampleObject(value = "{\"timestamp\":\"2024-06-17T15:35:28.363339\",\"status\":\"INTERNAL_SERVER_ERROR\",\"message\":\"Internal Server Error\",\"details\":null}")))
+  public ResponseEntity<Object> deleteCourse(@PathVariable("courseId") @Schema(description = "ID do curso", example = "3fa85f64-5717-4562-b3fc-2c963f66afa6") String courseId) {
     deleteCourseUseCase.execute(UUID.fromString(courseId));
 
     return ResponseEntity.noContent().build();
