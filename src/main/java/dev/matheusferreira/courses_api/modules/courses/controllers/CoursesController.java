@@ -73,7 +73,13 @@ public class CoursesController {
   }
 
   @PutMapping("/{courseId}")
-  public CourseEntity updateCourse(@PathVariable("courseId") String courseId, @RequestBody @Valid UpdateCourseDTO updateCourseDTO) {
+  @Operation(summary = "Atualização de cursos", description = "Endpoint responsável por fazer a atualização de um curso.")
+  @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = CourseEntity.class)))
+  @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ExceptionDTO.class)))
+  @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ExceptionDTO.class), examples = @ExampleObject(value = "{\"timestamp\":\"2024-06-17T15:35:28.363339\",\"status\":\"NOT_FOUND\",\"message\":\"O curso não foi encontrado\",\"details\":null}")))
+  @ApiResponse(responseCode = "409", description = "Conflict", content = @Content(schema = @Schema(implementation = ExceptionDTO.class), examples = @ExampleObject(value = "{\"timestamp\":\"2024-06-17T15:35:28.363339\",\"status\":\"CONFLICT\",\"message\":\"Um curso com o mesmo nome e categoria já está cadastrado\",\"details\":null}")))
+  @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ExceptionDTO.class), examples = @ExampleObject(value = "{\"timestamp\":\"2024-06-17T15:35:28.363339\",\"status\":\"INTERNAL_SERVER_ERROR\",\"message\":\"Internal Server Error\",\"details\":null}")))
+  public CourseEntity updateCourse(@Schema(description = "ID do curso", example = "3fa85f64-5717-4562-b3fc-2c963f66afa6") @PathVariable("courseId") String courseId, @RequestBody @Valid UpdateCourseDTO updateCourseDTO) {
     updateCourseDTO.setId(UUID.fromString(courseId));
     return updateCourseUseCase.execute(updateCourseDTO);
   }
