@@ -96,6 +96,10 @@ public class CoursesController {
   }
 
   @PatchMapping("/{courseId}/active")
+  @Operation(summary = "Ativação/desativação de cursos", description = "Endpoint responsável por fazer a ativação ou desativação de um curso (toggle).")
+  @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = CourseEntity.class)))
+  @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ExceptionDTO.class), examples = @ExampleObject(value = "{\"timestamp\":\"2024-06-17T15:35:28.363339\",\"status\":\"NOT_FOUND\",\"message\":\"O curso não foi encontrado\",\"details\":null}")))
+  @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ExceptionDTO.class), examples = @ExampleObject(value = "{\"timestamp\":\"2024-06-17T15:35:28.363339\",\"status\":\"INTERNAL_SERVER_ERROR\",\"message\":\"Internal Server Error\",\"details\":null}")))
   public CourseEntity toggleCourseActive(@PathVariable("courseId") String courseId) {
     return toggleCourseActiveUseCase.execute(UUID.fromString(courseId));
   }
