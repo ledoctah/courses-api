@@ -46,7 +46,7 @@ public class CoursesController {
   private ToggleCourseActiveUseCase toggleCourseActiveUseCase;
   
   @GetMapping
-  public List<CourseEntity> listCourses(@RequestBody @Valid ListCoursesDTO listCoursesDTO) {
+  public List<CourseEntity> listCourses(@Valid ListCoursesDTO listCoursesDTO) {
     return listCoursesUseCase.execute(listCoursesDTO);
   }
 
