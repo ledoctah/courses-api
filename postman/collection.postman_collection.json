@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "52bd3721-f58a-43c0-882d-fd6299a667f6",
+		"name": "[Rocketseat] Courses API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21643994"
+	},
+	"item": [
+		{
+			"name": "List Courses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cursos?name=Curso de Java&category=Desenvolvimento de Software",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cursos"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Curso de Java"
+						},
+						{
+							"key": "category",
+							"value": "Desenvolvimento de Software"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Curso de Java\",\n    \"category\": \"Desenvolvimento de Software\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cursos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cursos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Course",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Curso de Javascript\",\n    \"category\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cursos/:courseId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cursos",
+						":courseId"
+					],
+					"variable": [
+						{
+							"key": "courseId",
+							"value": "d802d7ad-b117-4473-a4f6-6041fd8dec92"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Course",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cursos/:courseId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cursos",
+						":courseId"
+					],
+					"variable": [
+						{
+							"key": "courseId",
+							"value": "4372b57e-e794-430c-a40e-e70561de2b44"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch Course Active",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Curso de Java\",\n    \"category\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cursos/:courseId/active",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cursos",
+						":courseId",
+						"active"
+					],
+					"variable": [
+						{
+							"key": "courseId",
+							"value": "d802d7ad-b117-4473-a4f6-6041fd8dec92"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
