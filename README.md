@@ -51,4 +51,4 @@ There is also a Postman collection with all the endpoints requests inside the fo
 
 ### Made with ❤ by [Matheus Ferreira](https://www.github.com/ledoctah)
 
-[![Linkedin Badge](https://img.shields.io/badge/-Matheus%20Ferreira-6633cc?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/ferreira-matheus/)](https://www.linkedin.com/in/ferreira-matheus/)
+[![Linkedin Badge](https://img.shields.io/badge/-Matheus%20Ferreira-6633cc?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/o-matheus-ferreira/)](https://www.linkedin.com/in/o-matheus-ferreira/)
